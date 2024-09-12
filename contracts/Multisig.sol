@@ -47,7 +47,6 @@ contract Multisig {
         for(uint256 i = 0; i < _validSigners.length; i++) {
             require(_validSigners[i] != address(0), "zero address not allowed");
             require(!isValidSigner[_validSigners[i]], "signer already exist");
-            // require(_validSigners[i] == msg.sender); // msg.sender should be the first valid signer
             isValidSigner[_validSigners[i]] = true;
         }
 
@@ -96,13 +95,6 @@ contract Multisig {
         require(IERC20(trx.tokenAddress).balanceOf(address(this)) >= trx.amount, "insufficient funds");
         require(!trx.isCompleted, "transaction already completed");
         require(trx.noOfApproval < quorum, "approvals already reached");
-
-        // for(uint256 i = 0; i < trx.transactionSigners.length; i++) {
-        //     if(trx.transactionSigners[i] == msg.sender) {
-        //         revert("can't sign twice");
-        //     }
-        // }
-
         require(isValidSigner[msg.sender], "not a valid signer");
         require(!hasSigned[msg.sender][_txId], "can't sign twice");
 
@@ -155,9 +147,3 @@ contract Multisig {
 
 }
 
-
-
-// Deployed Addresses
-
-// Web3CXIModule#Web3CXI - 0xb264D760D079EfeC7cCD98F65287458C2a91A26C
-// MultisigModule#Multisig - 0x06e48399d9b9a8159Db4180a9123F81a979f5545
