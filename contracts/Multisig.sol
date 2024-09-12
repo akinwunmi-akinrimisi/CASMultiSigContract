@@ -33,7 +33,7 @@ contract Multisig {
     mapping(address => mapping(uint256 => bool)) hasSignedQuorumUpdate; // Tracks who has signed for quorum update proposals
 
 
-    mapping(address => bool) isValidSigner;
+    mapping(address => bool) public isValidSigner;
     mapping(uint => Transaction) transactions; // txId -> Transaction
     
     // signer -> transactionId -> bool (checking if an address has signed)

@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+import "@typechain/hardhat";
 
 import "@nomicfoundation/hardhat-ethers";
 import { HardhatUserConfig } from "hardhat/config";
